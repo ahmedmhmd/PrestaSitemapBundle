@@ -79,7 +79,7 @@ class RouteAnnotationEventListener implements SitemapListenerInterface
         foreach ($collection->all() as $name => $route) {
 
             $options = $this->getOptions($name, $route);
-            if ($options) {
+            if ($options && (!isset($options['section']) || $options['section'] == $event->getSection())) {
                 $event->getGenerator()->addUrl(
                     $this->getUrlConcrete($name, $options),
                     $event->getSection() ? $event->getSection() : 'default'
@@ -110,7 +110,8 @@ class RouteAnnotationEventListener implements SitemapListenerInterface
         $options = array(
             'priority' => 1,
             'changefreq' => UrlConcrete::CHANGEFREQ_DAILY,
-            'lastmod' => new \DateTime()
+            'lastmod' => new \DateTime(),
+            'section' => null
         );
 
         if (is_array($option)) {
