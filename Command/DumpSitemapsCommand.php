@@ -54,6 +54,12 @@ class DumpSitemapsCommand extends ContainerAwareCommand
                 InputOption::VALUE_NONE,
                 'Gzip sitemap'
             )
+            ->addOption(
+                'sitemapFilePrefix',
+                null,
+                InputOption::VALUE_NONE,
+                'Sitemap File Prefix'
+            )
             ->addArgument(
                 'target',
                 InputArgument::OPTIONAL,
@@ -110,7 +116,7 @@ class DumpSitemapsCommand extends ContainerAwareCommand
         $options = array(
             'gzip' => (Boolean)$input->getOption('gzip'),
         );
-        $filenames = $dumper->dump($targetDir, $baseUrl, $input->getOption('section'), $options);
+        $filenames = $dumper->dump($targetDir, $baseUrl, $input->getOption('section'), $options, $input->getOption('sitemapFilePrefix'));
 
         if ($filenames === false) {
             $output->writeln("<error>No URLs were added to sitemap by EventListeners</error> - this may happen when provided section is invalid");

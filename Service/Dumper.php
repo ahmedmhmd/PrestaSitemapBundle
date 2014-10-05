@@ -70,11 +70,15 @@ class Dumper extends AbstractGenerator
      * @param string $host
      * @param null   $section   Optional section name - only sitemaps of this section will be updated
      * @param array  $options   Possible options: gzip
+     * @param string $sitemapFilePrefix
      *
      * @return array|bool
      */
-    public function dump($targetDir, $host, $section = null, array $options = array())
+    public function dump($targetDir, $host, $section = null, array $options = array(), $sitemapFilePrefix = null)
     {
+        if ($sitemapFilePrefix) {
+            $this->sitemapFilePrefix = $sitemapFilePrefix;
+        }
         $options = array_merge(array('gzip' => false), $options);
 
         $this->baseUrl = $host;
