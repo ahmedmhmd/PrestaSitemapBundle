@@ -57,7 +57,7 @@ class DumpSitemapsCommand extends ContainerAwareCommand
             ->addOption(
                 'sitemapFilePrefix',
                 null,
-                InputOption::VALUE_NONE,
+                InputOption::VALUE_OPTIONAL,
                 'Sitemap File Prefix'
             )
             ->addArgument(
